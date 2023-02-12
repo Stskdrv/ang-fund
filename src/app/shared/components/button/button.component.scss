@@ -1,0 +1,30 @@
+.app-button {
+    display: flex;
+    margin: 10px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 36px;
+    gap: 10px;
+    background: #007298;
+    border-radius: 4px;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+        background: #016486;
+    }
+    &:focus {
+        background: #32a4ca;
+    }
+    &:active {
+        background: #12323d;
+    }
+
+    
+
+    &__single-icon {
+        padding: 13px;
+    }
+}
