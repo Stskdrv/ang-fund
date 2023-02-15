@@ -1,7 +1,7 @@
-import { SharedModule } from './../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoursesComponent } from './component/courses.component';
+import { CoursesComponent } from './courses.component';
 
 
 
