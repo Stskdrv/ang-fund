@@ -15,9 +15,8 @@
         </div>
         <div class="course-card__info-actions">
             <div *ngIf="isEditable" class="course-card__info__buttons">
-              <app-button [text] ="'Show course'"></app-button>
-              <app-button [iconName]="'pencil'"></app-button>
-              <app-button [iconName]="'trash'"></app-button>
+              <app-button [text]="'Show course'" (click)="showCourse(title)"></app-button>
+              <ng-content></ng-content>
             </div>
             
         </div>

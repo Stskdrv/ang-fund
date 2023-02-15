@@ -9,4 +9,9 @@ import { Component, Input } from '@angular/core';
 export class CoursesComponent {
   @Input() courses = mockedCourseList;
 
+
+  logEvent = (e: any) => {
+    console.log(e);
+  }
+
 }

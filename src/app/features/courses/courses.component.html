@@ -10,8 +10,11 @@
             [initDuration]="course.duration"
             [authors]="course.authors"
             [date]="course.creationDate"
+            [isEditable]="true"
+            (onShowCourse)="logEvent($event)"
         >
-            
+            <app-button [iconName]="'pencil'"></app-button>
+            <app-button [iconName]="'trash'"></app-button>
         </app-course-card>
     </div>
 </div>
