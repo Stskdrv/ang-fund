@@ -1,0 +1,24 @@
+<div class="course-card">
+    <div class="course-card__description">
+      <div class="course-card__description-title">
+       {{title}}</div>
+      <div class="course-card__description-text">{{description}}</div>
+    </div>
+    <div class="course-card__info">
+        <div class="course-card__info-text">
+            <div>
+              <b>Authors: </b>
+              {{authors.join(', ')}}
+            </div>
+            <div><b>Duration: </b>{{duration}}</div>
+            <div><b>Created: </b>{{creationDate}}</div>
+        </div>
+        <div class="course-card__info-actions">
+            <div *ngIf="isEditable" class="course-card__info__buttons">
+              <app-button [text]="'Show course'" (click)="showCourse(title)"></app-button>
+              <ng-content></ng-content>
+            </div>
+            
+        </div>
+    </div>
+</div>

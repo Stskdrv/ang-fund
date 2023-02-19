@@ -6,11 +6,6 @@ import {
   HeaderComponent,
   ButtonComponent,
   InfoComponent,
-  SearchComponent,
-  CourseCardComponent,
-  LoginFormComponent,
-  RegistrationFormComponent,
-  CourseFormComponent
 } from "./components";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
@@ -18,12 +13,7 @@ const components = [
   HeaderComponent,
   ButtonComponent,
   InfoComponent,
-  SearchComponent,
   ModalComponent,
-  CourseCardComponent,
-  LoginFormComponent,
-  RegistrationFormComponent,
-  CourseFormComponent
 ];
 
 @NgModule({
