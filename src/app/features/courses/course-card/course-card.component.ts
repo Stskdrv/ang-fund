@@ -23,10 +23,10 @@ export class CourseCardComponent {
   // @Input() course!: Course;
   @Input() title!: string;
   @Input() description!: string;
-  @Input() date!: string
-  creationDate: string = this.date || this.formatDate(new Date());
+  @Input() date!: Date
+  creationDate: Date = this.date;
   @Input() initDuration!: number;
-  @Input() duration: string = this.formatDuration(this.initDuration);
+  @Input() duration: number = this.initDuration;
   @Input() authors!: string[];
 
   @Input() isEditable: boolean = true;
@@ -40,7 +40,7 @@ export class CourseCardComponent {
 interface Course {
   title: string,
   description: string,
-  creationDate: string,
+  creationDate: Date,
   duration: number,
   autors: string[],
 }

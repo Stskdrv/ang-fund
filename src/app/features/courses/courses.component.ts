@@ -14,4 +14,10 @@ export class CoursesComponent {
     console.log(e);
   }
 
+  onSearch($e: string): void {
+    //search
+    console.log($e);
+    
+  }
+
 }

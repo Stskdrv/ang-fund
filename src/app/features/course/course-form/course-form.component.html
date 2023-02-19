@@ -1,6 +1,6 @@
 <!-- Replace ::text:: with your code -->
 <h2>Create / Edit Course</h2>
-<form>
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
   <div class="app-plate">
     <div class="course">
       <h3>Main Info</h3>
@@ -10,7 +10,11 @@
           type="text"
           id="title"
           placeholder="Input text"
+          formControlName="title" 
         />
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
+          <div *ngIf="title.errors.required">Title is required</div>
+        </div>
       </div>
       <div class="form__control">
         <label for="description">Description</label>
@@ -20,7 +24,11 @@
           placeholder="Input text"
           rows="4"
           cols="5"
+          formControlName="description"
         ></textarea>
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
+          <div *ngIf="description.errors.required">Description is required</div>
+        </div>
       </div>
       <div class="separator"></div>
       <h3>Authors</h3>
@@ -30,11 +38,19 @@
             type="text"
             id="author"
             placeholder="Input Author Name"
+            formControlName="newAuthor"
           />
-          <app-button></app-button>
+          <app-button (click)="addAuthor()" text="Add author"></app-button>
         </div>
         <div class="course__authors">
-          ::Authors::
+          <div formArrayName="authors">
+            <div *ngFor="let author of authors.controls; let i = index;">
+              <div [formGroupName]="i" class="course__author">
+                <input type="text" formControlName="name" disabled />
+                <app-button (click)="removeAuthor(i)">Remove</app-button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="separator"></div>
@@ -45,14 +61,19 @@
             type="number"
             id="duration"
             placeholder="Input duration"
+            formControlName="duration"
           />
           <div class="course__duration">
-            ::Duration::
+            {{ courseForm.get('duration').value || 0 }} min
+          </div>
+          <div *ngIf="duration.invalid && (duration.dirty || duration.touched)" class="error">
+            <div *ngIf="duration.errors.required">Duration is required</div>
+            <div *ngIf="duration.errors.min">Duration cannot be negative</div>
           </div>
         </div>
       </div>
       <div class="form__action">
-        <app-button></app-button>
+        <app-button type="submit" text="Save Course" [disabled]="courseForm.invalid"></app-button>
       </div>
     </div>
   </div>
