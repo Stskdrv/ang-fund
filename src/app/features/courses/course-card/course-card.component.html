@@ -10,8 +10,8 @@
               <b>Authors: </b>
               {{authors.join(', ')}}
             </div>
-            <div><b>Duration: </b>{{duration | duration}}</div>
-            <div><b>Created: </b>{{creationDate | creationDate }}</div>
+            <div><b>Duration: </b>{{initDuration | duration}}</div>
+            <div><b>Created: </b>{{date | creationDate }}</div>
         </div>
         <div class="course-card__info-actions">
             <div *ngIf="isEditable" class="course-card__info__buttons">

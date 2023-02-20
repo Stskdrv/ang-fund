@@ -10,10 +10,10 @@
           type="text"
           id="title"
           placeholder="Input text"
-          formControlName="title" 
+          formControlName="title"
         />
         <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
-          <div *ngIf="title.errors.required">Title is required</div>
+          <div *ngIf="courseForm.get('title').hasError('required')">Title is required</div>
         </div>
       </div>
       <div class="form__control">
@@ -27,7 +27,7 @@
           formControlName="description"
         ></textarea>
         <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
-          <div *ngIf="description.errors.required">Description is required</div>
+          <div *ngIf="courseForm.get('description').touched && courseForm.get('description').hasError('required')">Description is required</div>
         </div>
       </div>
       <div class="separator"></div>
@@ -40,14 +40,14 @@
             placeholder="Input Author Name"
             formControlName="newAuthor"
           />
-          <app-button (click)="addAuthor()" text="Add author"></app-button>
+          <app-button (click)="onAddAuthor()" text="Add author"></app-button>
         </div>
         <div class="course__authors">
           <div formArrayName="authors">
             <div *ngFor="let author of authors.controls; let i = index;">
               <div [formGroupName]="i" class="course__author">
-                <input type="text" formControlName="name" disabled />
-                <app-button (click)="removeAuthor(i)">Remove</app-button>
+                <input type="text" formControlName="name" />
+                <app-button (click)="onRemoveAuthor(i)">Remove</app-button>
               </div>
             </div>
           </div>
@@ -67,8 +67,8 @@
             {{ courseForm.get('duration').value || 0 }} min
           </div>
           <div *ngIf="duration.invalid && (duration.dirty || duration.touched)" class="error">
-            <div *ngIf="duration.errors.required">Duration is required</div>
-            <div *ngIf="duration.errors.min">Duration cannot be negative</div>
+            <div *ngIf="duration.errors['required']">Duration is required</div>
+            <div *ngIf="duration.errors['min']">Duration cannot be negative</div>
           </div>
         </div>
       </div>
