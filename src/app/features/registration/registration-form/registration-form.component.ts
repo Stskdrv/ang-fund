@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { emailValidator } from 'src/app/shared/utils/email-validator';
 
 @Component({
@@ -15,15 +15,36 @@ export class RegistrationFormComponent {
     ]),
     email: new FormControl('', [
       Validators.required,
-      emailValidator
+      emailValidator()
     ]),
     password: new FormControl('', [
       Validators.required
     ])
   });
-  
+  successMessage!: string;
+  errorMessage!: string;
 
-  onSubmit(): void {
-    console.log(this.regForm.value);
+  getErrorMessage(field: string): string {
+    if (this.regForm.get(field)!.hasError('required')) {
+      return 'This field is required.';
+    } else if (this.regForm.get(field)!.hasError('minlength')) {
+      const requiredLength = this.regForm.get(field)!.errors!['minlength'].requiredLength;
+      return `This field must be at least ${requiredLength} characters long.`;
+    } else if (this.regForm.get(field)!.errors?.['invalidEmail']) {
+      return 'Please enter a valid email address.';
+    } else {
+      return '';
+    }
+  }
+  
+  onSubmit(): void {    
+    if (this.regForm.valid) {
+      this.successMessage = 'Registration successful!';
+      this.errorMessage = '';
+      alert(JSON.stringify(this.regForm.value, null, 2));
+    } else {
+      this.successMessage = '';
+      this.errorMessage = 'Please fill out all required fields.';
+    }
   }
  }

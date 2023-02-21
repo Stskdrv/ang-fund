@@ -1,4 +1,3 @@
-<!-- Replace ::text:: with your code -->
 <h2>Create / Edit Course</h2>
 <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
   <div class="app-plate">
@@ -11,6 +10,7 @@
           id="title"
           placeholder="Input text"
           formControlName="title"
+          [required]="title.invalid && (title.dirty || title.touched)"
         />
         <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
           <div *ngIf="courseForm.get('title').hasError('required')">Title is required</div>
@@ -25,6 +25,7 @@
           rows="4"
           cols="5"
           formControlName="description"
+          [required]="description.invalid && (description.dirty || description.touched)"
         ></textarea>
         <div *ngIf="description.invalid && (description.dirty || description.touched)" class="error">
           <div *ngIf="courseForm.get('description').touched && courseForm.get('description').hasError('required')">Description is required</div>
@@ -39,15 +40,16 @@
             id="author"
             placeholder="Input Author Name"
             formControlName="newAuthor"
+            [disabled]="true"
           />
           <app-button (click)="onAddAuthor()" text="Add author"></app-button>
         </div>
         <div class="course__authors">
-          <div formArrayName="authors">
+          <div formArrayName="authors" formControlName="authors">
             <div *ngFor="let author of authors.controls; let i = index;">
-              <div [formGroupName]="i" class="course__author">
-                <input type="text" formControlName="name" />
-                <app-button (click)="onRemoveAuthor(i)">Remove</app-button>
+              <div [formGroupName]="i" class="course__author" [style]="{'border': '1px solid grey', 'display': 'flex'}">
+                <div>{{author}}</div>
+                <app-button (click)="onRemoveAuthor(i)" text="x"></app-button>
               </div>
             </div>
           </div>
@@ -62,6 +64,7 @@
             id="duration"
             placeholder="Input duration"
             formControlName="duration"
+            [required]="duration.invalid && (duration.dirty || duration.touched)"
           />
           <div class="course__duration">
             {{ courseForm.get('duration').value || 0 }} min

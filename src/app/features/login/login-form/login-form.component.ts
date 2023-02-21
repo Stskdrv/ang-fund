@@ -10,12 +10,23 @@ export class LoginFormComponent implements OnInit {
   email!: string;
   password!: string;
 
+  successMessage!: string;
+  errorMessage!: string;
+
+
   constructor() { }
 
   ngOnInit() {
   }
 
   onSubmit(loginForm: NgForm) {
-    alert(JSON.stringify(loginForm.value, null, 2));
+    if (loginForm.valid) {
+      this.successMessage = 'Login successful!';
+      this.errorMessage = '';
+      alert(JSON.stringify(loginForm.value, null, 2));
+    } else {
+      this.successMessage = '';
+      this.errorMessage = 'Please fill out all required fields.';
+    }
   }
 }

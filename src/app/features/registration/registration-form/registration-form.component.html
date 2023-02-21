@@ -1,4 +1,4 @@
-<form [formGroup]="regForm">
+<form [formGroup]="regForm" (ngSubmit)="onSubmit()">
   <h2 class="text-align-center">Registration</h2>
   <div class="app-plate">
     <div class="registration-form">
@@ -10,16 +10,24 @@
             id="name"
             formControlName="name"
             placeholder="Input text"
+            [required]="regForm.get('name').invalid && (regForm.get('name').dirty || regForm.get('name').touched)"
           />
+          <div *ngIf="regForm.get('name').invalid && (regForm.get('name').dirty || regForm.get('name').touched)" class="form__message">
+            {{ getErrorMessage('name') }}
+          </div>
         </div>
         <div class="form__control">
           <label for="email">Email</label>
           <input
-            type="text"
+            type="email"
             id="email"
             formControlName="email"
             placeholder="Input text"
+            [required]="regForm.get('email').invalid && (regForm.get('email').dirty || regForm.get('email').touched)"
           />
+          <div *ngIf="regForm.get('email').invalid && (regForm.get('email').dirty || regForm.get('email').touched)" class="form__message">
+            {{ getErrorMessage('email') }}
+          </div>
         </div>
         <div class="form__control">
           <label for="password">Password</label>
@@ -28,11 +36,17 @@
             id="password"
             formControlName="password"
             placeholder="Input text"
+            [required]="regForm.get('password').invalid && (regForm.get('password').dirty || regForm.get('password').touched)"
           />
+          <div *ngIf="regForm.get('password').invalid && (regForm.get('password').dirty || regForm.get('password').touched)" class="form__message">
+            {{ getErrorMessage('password') }}
+          </div>
         </div>
       </div>
       <div class="form__action">
-        <!-- <app-button text="Login" type="submit" [disabled]="!regForm.valid">Login</app-button> -->
+        <app-button text="Register"></app-button>
+        <div *ngIf="successMessage">{{ successMessage }}</div>
+        <div *ngIf="errorMessage">{{ errorMessage }}</div>
       </div>
     </div>
   </div>

@@ -13,12 +13,11 @@
             [(ngModel)]="email" 
             #emailInput="ngModel" 
             appEmailValidator
-            required
+            [required]="loginForm.submitted || emailInput.touched"
           />
           <div 
             *ngIf="loginForm.submitted || emailInput.touched" 
             class="invalid-feedback"
-            [hidden]="emailInput.valid || emailInput.pristine"
           >
             <div *ngIf="emailInput.errors?.['required']">Email is required</div>
             <div *ngIf="emailInput.errors?.['invalidEmail']">Invalid email format</div>
@@ -32,12 +31,11 @@
             name="password"
             placeholder="Input text"
             [(ngModel)]="password" #passwordInput="ngModel"
-            required
+            [required]="loginForm.submitted || passwordInput.touched"
           />
           <div 
             *ngIf="loginForm.submitted || passwordInput.touched" 
             class="invalid-feedback"
-            [hidden]="passwordInput.valid || passwordInput.pristine"
           >
             <div *ngIf="passwordInput.errors?.['required']">Password is required</div>
           </div>
@@ -45,7 +43,9 @@
       </div>
       <div>
         <div class="form__action">
-          <app-button type="submit" [disabled]="!loginForm.valid" text="Login"></app-button>
+          <app-button type="submit" text="Login"></app-button>
+          <div *ngIf="successMessage">{{ successMessage }}</div>
+          <div *ngIf="errorMessage">{{ errorMessage }}</div>
         </div>
         <div class="form__text">
           If you don't have an account you may <strong>Registration</strong>
