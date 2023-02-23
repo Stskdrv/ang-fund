@@ -1,4 +1,4 @@
-<div class="app-search" #searchForm="ngForm">
+<div class="app-search" searchForm="ngForm">
   <input type="text" placeholder="Input text" name="search" ngModel>
   <app-button [text]="'Search'" (click)="search.emit(searchForm.value.search)"></app-button>
 </div>

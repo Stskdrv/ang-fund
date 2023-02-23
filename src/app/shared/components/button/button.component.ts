@@ -10,6 +10,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 export class ButtonComponent {
   @Input() text: string = '';
   @Input() iconName: any = '';
+  @Input() disabled: boolean = false;
 
   hover = false;
 
