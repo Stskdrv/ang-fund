@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './registration.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -5,10 +6,14 @@ import { CommonModule } from '@angular/common';
 
 
 @NgModule({
-  declarations: [RegistrationComponent],
+  declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
-  exports: [RegistrationComponent]
+  exports: []
 })
-export class RegistrationModule { }
+export class RegistrationModule {
+
+
+ }
