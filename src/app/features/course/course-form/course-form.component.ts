@@ -10,7 +10,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 })
 export class CourseFormComponent implements OnInit {
   courseForm!: FormGroup;
-  public authors: FormArray;
+  public authors!: FormArray;
 
   constructor(public fb: FormBuilder, public library: FaIconLibrary) {
     library.addIconPacks(fas);
@@ -48,15 +48,24 @@ export class CourseFormComponent implements OnInit {
   }
 
   onAddAuthor() {
-    const control = this.fb.control('', [Validators.required]);
-    (this.courseForm.get('authors') as FormArray).push(control);
+    const control = this.courseForm.get('newAuthor');
+    (this.courseForm.get('authors') as FormArray).push(control!.value);
+    this.courseForm.get('newAuthor')!.reset();
+    
   }
 
   onRemoveAuthor(index: number) {
-    //
+    console.log((this.courseForm.get('authors') as any));
+    
+    (this.courseForm.get('authors') as any).controls.splice(index,1);
   }
 
   onSubmit() {
-    console.log('submit');
+    if (this.courseForm.valid) {
+      console.log('submit', this.courseForm.value);
+      this.courseForm.reset();
+    } else {
+      this.courseForm.markAllAsTouched();
+    }
   }
 }
