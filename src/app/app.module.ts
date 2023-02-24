@@ -6,20 +6,20 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CourseComponent } from './features/course/course.component';
-import { LoginComponent } from './features/login/login.component';
-import { RegistrationComponent } from './features/registration/registration.component';
 import { RegistrationFormComponent } from './features/registration';
 import { LoginFormComponent } from './features/login';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent, CourseComponent, RegistrationFormComponent, LoginFormComponent],
+  declarations: [AppComponent, RegistrationFormComponent, LoginFormComponent],
   imports: [
     BrowserModule,
     SharedModule,
     CoursesModule,
     FontAwesomeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
