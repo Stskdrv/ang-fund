@@ -9,12 +9,19 @@ import { CourseComponent } from './features/course/course.component';
 import { RegistrationFormComponent } from './features/registration';
 import { LoginFormComponent } from './features/login';
 import { AppRoutingModule } from './app-routing.module';
+import { CourseModule } from './features/course';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationFormComponent, LoginFormComponent],
+  declarations: [
+    AppComponent,
+    // CourseComponent,
+    RegistrationFormComponent,
+    LoginFormComponent,
+  ],
   imports: [
     BrowserModule,
     SharedModule,
+    CourseModule,
     CoursesModule,
     FontAwesomeModule,
     FormsModule,

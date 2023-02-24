@@ -1,4 +1,4 @@
-<div class="app-button" [ngClass]="{'hover': hover}" (mouseenter)="hover = true" (mouseleave)="hover = false">
+<button class="app-button" [disabled]="disabled" [ngClass]="{'hover': hover}" [type]="type" (mouseenter)="hover = true" (mouseleave)="hover = false">
   <fa-icon *ngIf="iconName" [icon]="['fas', iconName]"></fa-icon>
   {{text}}
-</div>
+</button>

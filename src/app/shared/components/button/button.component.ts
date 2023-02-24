@@ -5,12 +5,13 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
   @Input() text: string = '';
   @Input() iconName: any = '';
   @Input() disabled: boolean = false;
+  @Input() type: string;
 
   hover = false;
 
