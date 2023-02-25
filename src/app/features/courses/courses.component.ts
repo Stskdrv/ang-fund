@@ -1,5 +1,5 @@
-import { mockedCourseList } from './mockData';
 import { Component, Input } from '@angular/core';
+import { mockedCourseList } from './mockData';
 
 @Component({
   selector: 'app-courses',
