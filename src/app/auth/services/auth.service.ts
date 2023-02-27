@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { SessionStorageService } from './session-storage.service';
+import { BASE_URL } from 'src/environments/environment';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class AuthService {
   ) { }
   
   login(name: string, email: string, password: string): Observable<any> {
-    return this.http.post<AuthResponse>('/api/login', { name, email, password }).pipe(
+    return this.http.post<AuthResponse>(`${BASE_URL}/api/login`, { name, email, password }).pipe(
       tap(response => {
         this.sessionStorageService.setToken(response.token);
         this.isAuthorized$$.next(true);
@@ -28,7 +29,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post('/api/logout', {}).pipe(
+    return this.http.post(`${BASE_URL}/api/logout`, {}).pipe(
       tap(() => {
         this.sessionStorageService.deleteToken();
         this.isAuthorized$$.next(false);
@@ -41,7 +42,7 @@ export class AuthService {
     email: string,
     password: string,
   ): Observable<any> {
-    return this.http.post('/api/register', {
+    return this.http.post(`${BASE_URL}/api/register`, {
       name,
       email,
       password

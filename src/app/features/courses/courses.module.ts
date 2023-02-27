@@ -1,3 +1,4 @@
+import { AdminGuard } from './../../user/guards/admin.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -13,9 +14,17 @@ const routes: Routes = [
     path: '',
     component: CoursesComponent,
     children: [
-      { path: 'add', component: CourseFormComponent },
+      {
+        path: 'add',
+        canActivate: [AdminGuard],
+        component: CourseFormComponent
+      },
       { path: ':id', component: CourseCardComponent },
-      { path: 'edit/:id', component: CourseFormComponent }
+      {
+        path: 'edit/:id',
+        canActivate: [AdminGuard],
+        component: CourseFormComponent
+      }
     ]
   }
 ];

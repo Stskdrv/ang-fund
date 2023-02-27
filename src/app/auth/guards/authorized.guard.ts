@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CanLoad, Router, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { SessionStorageService } from '../services/session-storage.service';
 
 
 @Injectable({
@@ -11,7 +10,7 @@ import { SessionStorageService } from '../services/session-storage.service';
   
   
 export class AuthorizedGuard implements CanLoad {
-  constructor(private authService: AuthService, private sessionStorageService: SessionStorageService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   canLoad(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 

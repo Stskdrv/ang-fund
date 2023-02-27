@@ -1,3 +1,4 @@
+import { CourseModule } from './features/course/course.module';
 import { CoursesModule } from './features/courses/courses.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,7 @@ import { SessionStorageService } from './auth/services/session-storage.service';
   imports: [
     BrowserModule,
     SharedModule,
+    CourseModule,
     CoursesModule,
     FontAwesomeModule,
     FormsModule,
@@ -29,7 +31,6 @@ import { SessionStorageService } from './auth/services/session-storage.service';
     AppRoutingModule,
   ],
   providers: [
-    AuthService,
     SessionStorageService,
     {
       provide: HTTP_INTERCEPTORS,
