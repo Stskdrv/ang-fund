@@ -31,7 +31,6 @@ import { SessionStorageService } from './auth/services/session-storage.service';
     AppRoutingModule,
   ],
   providers: [
-    SessionStorageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

@@ -12,22 +12,43 @@ export class CoursesService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}`);
+    return this.http.get<any>(`${this.baseUrl}/coueses/all`);
   }
 
-  createCourse(course: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}`, course);
+  createCourse(
+    title: string,
+    description: string,
+    duration: number,
+    authors: string[]): Observable<any> {
+    const options = {
+      title,
+      description,
+      duration,
+      authors
+    };
+    return this.http.post<any>(`${this.baseUrl}/courses/add`, options);
   }
 
-  editCourse(course: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/${course.id}`, course);
+  editCourse(
+    courseId: string,
+    title: string,
+    description: string,
+    duration: number,
+    authors: string[]): Observable<any> {
+      const options = {
+        title,
+        description,
+        duration,
+        authors
+      };
+    return this.http.put<any>(`${this.baseUrl}courses/${courseId}`, options);
   }
 
-  getCourse(courseId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${courseId}`);
+  getCourse(courseId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}courses/${courseId}`);
   }
 
   deleteCourse(courseId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/${courseId}`);
+    return this.http.delete<any>(`${this.baseUrl}courses//${courseId}`);
   }
 }

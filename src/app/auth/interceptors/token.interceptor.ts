@@ -12,29 +12,13 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-// @Injectable()
-// export class TokenInterceptor implements HttpInterceptor {
-//   constructor(@Inject(SessionStorageService) private SessionStorageService: SessionStorageService) {}
-
-//   intercept(req: HttpRequest<any>, next: HttpHandler) {
-//     const authToken = this.SessionStorageService.getToken();
-//     if (authToken) {
-//       const authReq = req.clone({
-//         headers: req.headers.set('Authorization', `Bearer ${authToken}`)
-//       });
-//       return next.handle(authReq);
-//     }
-//     return next.handle(req);
-//   }
-// }
-
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   AuthService: any;
-  constructor(@Inject(SessionStorageService) private SessionStorageService: SessionStorageService, private router: Router) {}
+  constructor(private sessionStorageService: SessionStorageService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.SessionStorageService.getToken();
+    const token = this.sessionStorageService.getToken();
 
     if (token) {
       request = request.clone({

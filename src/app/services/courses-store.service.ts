@@ -2,6 +2,7 @@ import { CoursesService } from './courses.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Course } from '../features/courses/course-card/course.model';
+import { catchError, finalize, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,80 +18,93 @@ export class CoursesStoreService {
 
   getAll() {
     this.isLoading$$.next(true);
-    this.coursesService.getAll().subscribe(
-      (courses) => {
-        this.courses$$.next(courses);
-        this.isLoading$$.next(false);
-      },
-      (error) => {
-        console.error(error);
-        this.isLoading$$.next(false);
-      }
-    );
+    this.coursesService.getAll()
+      .pipe(
+        map((courses) => this.courses$$.next(courses)),
+        catchError((error) => {
+          console.error(error);
+          return [];
+        }),
+        finalize(() => this.isLoading$$.next(false))
+      )
+      .subscribe();
   }
 
-  createCourse(course: Course) {
+  createCourse(
+    title: string,
+    description: string,
+    duration: number,
+    authors: string[]) {
     this.isLoading$$.next(true);
-    this.coursesService.createCourse(course).subscribe(
-      () => {
-        this.getAll();
-      },
-      (error) => {
-        console.error(error);
-        this.isLoading$$.next(false);
-      }
-    );
+    this.coursesService.createCourse(title, description, duration, authors)
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return [];
+        }),
+        finalize(() => this.isLoading$$.next(false))
+      )
+      .subscribe(() => this.getAll());
   }
 
-  editCourse(course: Course) {
+  editCourse(
+    courseId: string,
+    title: string,
+    description: string,
+    duration: number,
+    authors: string[]) {
     this.isLoading$$.next(true);
-    this.coursesService.editCourse(course).subscribe(
-      () => {
-        this.getAll();
-      },
-      (error) => {
-        console.error(error);
-        this.isLoading$$.next(false);
-      }
-    );
+    this.coursesService.editCourse(courseId,title, description, duration, authors)
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return [];
+        }),
+        finalize(() => this.isLoading$$.next(false))
+      )
+      .subscribe(() => this.getAll());
   }
 
-  getCourse(id: number) {
+  getCourse(courseId: string) {
     this.isLoading$$.next(true);
-    this.coursesService.getCourse(id).subscribe(
-      (course) => {
-        const courses = this.courses$$.getValue();
-        const index = courses.findIndex((c) => c.id === course.id);
-        if (index !== -1) {
-          courses[index] = course;
-          this.courses$$.next(courses);
-        }
-        this.isLoading$$.next(false);
-      },
-      (error) => {
-        console.error(error);
-        this.isLoading$$.next(false);
-      }
-    );
+    this.coursesService.getCourse(courseId)
+      .pipe(
+        map((course) => {
+          const courses = this.courses$$.getValue();
+          const index = courses.findIndex((c) => c.id === course?.id);
+          if (index !== -1) {
+            courses[index] = course;
+            this.courses$$.next(courses);
+          }
+        }),
+        catchError((error) => {
+          console.error(error);
+          return [];
+        }),
+        finalize(() => this.isLoading$$.next(false))
+      )
+      .subscribe();
   }
 
-  deleteCourse(id: string) {
+  deleteCourse(courseId: string) {
     this.isLoading$$.next(true);
-    this.coursesService.deleteCourse(id).subscribe(
-      () => {
-        const courses = this.courses$$.getValue();
-        const index = courses.findIndex((c) => c.id === id);
-        if (index !== -1) {
-          courses.splice(index, 1);
-          this.courses$$.next(courses);
-        }
-        this.isLoading$$.next(false);
-      },
-      (error) => {
-        console.error(error);
-        this.isLoading$$.next(false);
-      }
-    );
+    this.coursesService.deleteCourse(courseId)
+      .pipe(
+        map(() => {
+          const courses = this.courses$$.getValue();
+          const index = courses.findIndex((c) => c.id === courseId);
+          if (index !== -1) {
+            courses.splice(index, 1);
+            this.courses$$.next(courses);
+          }
+        }),
+        catchError((error) => {
+          console.error(error);
+          return [];
+        }),
+        finalize(() => this.isLoading$$.next(false))
+      )
+      .subscribe();
   }
 
   searchCourses(searchTerm: string) {
