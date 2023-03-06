@@ -15,6 +15,8 @@ import { AuthService } from '../services/auth.service';
 import { SessionStorageService } from '../services/session-storage.service';
 
 @Injectable()
+  
+  
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private sessionStorageService: SessionStorageService, private router: Router, private authService: AuthService) {}
 

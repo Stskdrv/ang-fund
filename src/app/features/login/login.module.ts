@@ -14,6 +14,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     LoginFormComponent,
+    LoginComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -23,6 +24,7 @@ const routes: Routes = [
   exports: [
     RouterModule,
     LoginFormComponent,
+    LoginComponent,
   ]
 })
   

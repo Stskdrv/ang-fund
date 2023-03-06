@@ -9,9 +9,7 @@ import { BASE_URL } from 'src/environments/environment';
 import { SessionStorageService } from './session-storage.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   private isAuthorized$$ = new BehaviorSubject<boolean>(false);
   public isAuthorized$ = this.isAuthorized$$.asObservable();

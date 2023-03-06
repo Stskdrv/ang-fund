@@ -1,3 +1,4 @@
+import { AuthModule } from './core/auth/auth.module';
 import { LoginComponent } from './features/login/login.component';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
@@ -33,8 +34,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes),
-        ReactiveFormsModule,
-        FormsModule,
+        AuthModule,
     ],
     exports: [
         RouterModule

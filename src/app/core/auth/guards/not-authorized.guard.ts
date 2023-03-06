@@ -5,9 +5,9 @@ import { Observable, tap } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+  
+  
 export class NotAuthorizedGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) {}

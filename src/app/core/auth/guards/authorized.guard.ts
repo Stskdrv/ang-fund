@@ -7,9 +7,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
   
   
 export class AuthorizedGuard implements CanLoad {
