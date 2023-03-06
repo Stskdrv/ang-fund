@@ -1,8 +1,11 @@
-import { CoursesService } from './courses.service';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Course } from '../features/courses/course-card/course.model';
+
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
+
+import { Course } from '../../features/courses/course-card/course.model';
+
+import { CoursesService } from './courses.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +13,22 @@ import { catchError, finalize, map } from 'rxjs/operators';
 export class CoursesStoreService {
   private isLoading$$ = new BehaviorSubject<boolean>(false);
   private courses$$ = new BehaviorSubject<Course[]>([]);
+  private filters$$ = new BehaviorSubject<string>('');
 
-  isLoading$ = this.isLoading$$.asObservable();
-  courses$ = this.courses$$.asObservable();
+  public isLoading$ = this.isLoading$$.asObservable();
+  public courses$ = this.courses$$.asObservable();
+  public filteredCourses$: Observable<Course[]>;
 
-  constructor(private coursesService: CoursesService) {}
+
+  constructor(private coursesService: CoursesService) {
+    this.filteredCourses$ = combineLatest([this.courses$, this.filters$$]).pipe(
+      map(([courses, filter]) =>
+        courses.filter((course) =>
+          course.title.toUpperCase().includes(filter.toUpperCase())
+        )
+      )
+    );
+  };
 
   getAll() {
     this.isLoading$$.next(true);
@@ -27,8 +41,7 @@ export class CoursesStoreService {
         }),
         finalize(() => this.isLoading$$.next(false))
       )
-      .subscribe();
-  }
+  };
 
   createCourse(
     title: string,
@@ -44,8 +57,7 @@ export class CoursesStoreService {
         }),
         finalize(() => this.isLoading$$.next(false))
       )
-      .subscribe(() => this.getAll());
-  }
+  };
 
   editCourse(
     courseId: string,
@@ -62,7 +74,6 @@ export class CoursesStoreService {
         }),
         finalize(() => this.isLoading$$.next(false))
       )
-      .subscribe(() => this.getAll());
   }
 
   getCourse(courseId: string) {
@@ -83,7 +94,6 @@ export class CoursesStoreService {
         }),
         finalize(() => this.isLoading$$.next(false))
       )
-      .subscribe();
   }
 
   deleteCourse(courseId: string) {
@@ -104,7 +114,6 @@ export class CoursesStoreService {
         }),
         finalize(() => this.isLoading$$.next(false))
       )
-      .subscribe();
   }
 
   searchCourses(searchTerm: string) {

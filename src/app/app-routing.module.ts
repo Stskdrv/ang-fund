@@ -1,7 +1,12 @@
-import { AuthorizedGuard } from './auth/guards/authorized.guard';
-import { NotAuthorizedGuard } from './auth/guards/not-authorized.guard';
+import { LoginComponent } from './features/login/login.component';
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router"
+import { RouterModule, Routes } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+import { SharedModule } from './shared/shared.module';
+import { AuthorizedGuard } from './core/auth/guards/authorized.guard';
+import { NotAuthorizedGuard } from './core/auth/guards/not-authorized.guard';
+import { LoginRoutingModule } from './features/login';
 
 const routes: Routes = [
     {
@@ -18,7 +23,7 @@ const routes: Routes = [
     },
     {
         path: 'courses',
-        canLoad: [AuthorizedGuard],
+        canActivate: [AuthorizedGuard],
         loadChildren: () => import('./features/courses/courses.module')
             .then(m => m.CoursesModule)
     },
@@ -27,7 +32,9 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes),
+        ReactiveFormsModule,
+        FormsModule,
     ],
     exports: [
         RouterModule
