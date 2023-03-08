@@ -22,7 +22,6 @@ const routes: Routes = [
     SharedModule,
   ],
   exports: [
-    RouterModule,
     LoginFormComponent,
     LoginComponent,
   ]

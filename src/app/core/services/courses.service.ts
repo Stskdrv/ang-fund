@@ -49,6 +49,6 @@ export class CoursesService {
   }
 
   deleteCourse(courseId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}courses//${courseId}`);
+    return this.http.delete<any>(`${this.baseUrl}courses/${courseId}`);
   }
 }

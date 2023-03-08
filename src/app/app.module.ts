@@ -1,4 +1,3 @@
-import { AuthModule } from './core/auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,7 +19,6 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     FontAwesomeModule,
     AppRoutingModule,
-    AuthModule,
   ],
   bootstrap: [AppComponent],
 })

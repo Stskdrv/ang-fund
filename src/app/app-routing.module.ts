@@ -24,6 +24,7 @@ const routes: Routes = [
     },
     {
         path: 'courses',
+        canLoad: [AuthorizedGuard],
         canActivate: [AuthorizedGuard],
         loadChildren: () => import('./features/courses/courses.module')
             .then(m => m.CoursesModule)

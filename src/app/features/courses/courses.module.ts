@@ -52,7 +52,6 @@ const routes: Routes = [
     CourseCardComponent,
     CourseFormComponent,
     SearchComponent,
-    RouterModule,
   ]
 })
 export class CoursesModule { }
