@@ -1,29 +1,5 @@
-<form #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" name="email" required
-        [(ngModel)]="email" appEmailValidator #emailInput="ngModel">
-  
-      <div *ngIf="loginForm.submitted || emailInput.touched" class="invalid-feedback"
-        [hidden]="emailInput.valid || emailInput.pristine">
-        <div *ngIf="emailInput.errors?.['required']">Email is required</div>
-        <div *ngIf="emailInput.errors?.['invalidEmail']">Invalid email format</div>
-      </div>
-    </div>
-  
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" name="password" required
-        [(ngModel)]="password">
-  
-      <div *ngIf="!password" class="invalid-feedback">
-        Password is required
-      </div>
-    </div>
-  
-    <app-button type="submit" text="Login" class="btn btn-primary"></app-button>
-    <div>
-        If you do not have an account you may sign up!
-    </div>
-  </form>
+<div>
+    <app-login-form></app-login-form>
+</div>
+
   

@@ -1,4 +1,4 @@
-import { mockedCourseList } from './mockData';
+import { Course } from './course-card/course.model';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent {
-  @Input() courses = mockedCourseList;
+  @Input() courses: Course[];
 
 
   logEvent = (e: any) => {

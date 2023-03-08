@@ -3,5 +3,6 @@ export interface Course {
   description: string;
   creationDate: Date;
   duration: number;
-  autors: string[];
+  authors: string[];
+  id?: string;
 }

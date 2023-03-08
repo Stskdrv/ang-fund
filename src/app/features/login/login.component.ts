@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,21 +6,5 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent {
-  loginForm!: FormGroup;
-  email!: string;
-  password!: string;
-
-  submitted = false;
-
-
-
-  onSubmit() {
-    this.submitted = true;
-    if (this.loginForm.valid) {
-      () => console.log('vadid, yeey');
-      
-    }
-  }
-}
+export class LoginComponent {}
 

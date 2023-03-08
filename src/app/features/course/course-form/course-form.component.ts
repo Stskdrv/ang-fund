@@ -11,7 +11,6 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 export class CourseFormComponent implements OnInit {
   courseForm!: FormGroup;
   public authors!: FormArray;
-
   constructor(public fb: FormBuilder, public library: FaIconLibrary) {
     library.addIconPacks(fas);
   }

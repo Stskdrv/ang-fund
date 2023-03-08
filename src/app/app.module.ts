@@ -1,34 +1,25 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CoursesModule } from './features/courses/courses.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import { CourseComponent } from './features/course/course.component';
-import { LoginComponent } from './features/login/login.component';
-import { RegistrationComponent } from './features/registration/registration.component';
-import { RegistrationFormComponent } from './features/registration';
-import { LoginFormComponent } from './features/login';
-import { CourseModule } from './features/course';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    // CourseComponent,
-    RegistrationFormComponent,
-    LoginFormComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     SharedModule,
-    CourseModule,
-    CoursesModule,
-    FontAwesomeModule,
-    FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
+    AppRoutingModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
