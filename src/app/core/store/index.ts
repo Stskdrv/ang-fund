@@ -1,13 +1,10 @@
 import { CoursesState } from './courses/courses.reducer';
 import { ActionReducerMap } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
 
 export interface State {
-    CoursesState: CoursesState,
+    courses: CoursesState,
 }
 
 export const reducers: ActionReducerMap<State> = {
-    CoursesState: undefined
+    courses: undefined
 };
-
-export const effects: any[] = [];

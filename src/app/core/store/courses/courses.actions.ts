@@ -29,7 +29,7 @@ export const requestSingleCourseFail = createAction(
 // Actions for requesting filtered courses
 export const requestFilteredCourses = createAction(
   '[Courses Page] Request Filtered Courses',
-  props<{ filter: string }>()
+  props<{ searchValue: string }>()
 );
 export const requestFilteredCoursesSuccess = createAction(
   '[Courses Page] Request Filtered Courses Success',
@@ -56,7 +56,7 @@ export const requestDeleteCourseFail = createAction(
 //Actions for editing course
 export const requestEditCourse = createAction(
   '[Courses Page] Request Edit Course',
-  props<{ courseId: string }>()
+  props<{ course: Course, courseId: string }>()
 );
 
 export const requestEditCourseSuccess = createAction(
@@ -70,7 +70,7 @@ export const requestEditCourseFail = createAction(
 //Actions for creating course
 export const requestCreateCourse = createAction(
   '[Courses Page] Request Create Course',
-  props<{ course: Course[] }>()
+  props<{ course: Course }>()
 );
 
 export const requestCreateCourseSuccess = createAction(
@@ -80,3 +80,4 @@ export const requestCreateCourseSuccess = createAction(
 export const requestCreateCourseFail = createAction(
   '[Courses Page] Request Create Course Fail'
 );
+

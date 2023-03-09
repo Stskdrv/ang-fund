@@ -1,5 +1,7 @@
+import { coursesReducer } from './core/store/courses/courses.reducer';
+import { CoursesEffects } from './core/store/courses/courses.effects';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers, effects } from './core/store/index';
+import { reducers } from './core/store/index';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,8 +25,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     ReactiveFormsModule,
     FontAwesomeModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot(effects),
+    StoreModule.forRoot({courses: coursesReducer}),
+    EffectsModule.forRoot([CoursesEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 10, // Retains last 10 states
     }),
