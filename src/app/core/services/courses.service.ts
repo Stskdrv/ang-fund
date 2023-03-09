@@ -31,10 +31,10 @@ export class CoursesService {
 
   editCourse(
     courseId: string,
-    title: string,
-    description: string,
-    duration: number,
-    authors: string[]): Observable<any> {
+    title?: string,
+    description?: string,
+    duration?: number,
+    authors?: string[]): Observable<any> {
       const options = {
         title,
         description,
